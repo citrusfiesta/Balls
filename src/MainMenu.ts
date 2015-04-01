@@ -1,4 +1,5 @@
 /// <reference path="libs/phaser.d.ts" />
+/// <reference path="C.ts" />
 
 module Balls {
 
@@ -13,7 +14,7 @@ module Balls {
 		}
 
 		startGame () {
-			this.game.state.start(C.MAIN_MENU, true, false);
+			this.game.state.start(C.LEVEL, true, false);
 		}
 	}
 }
