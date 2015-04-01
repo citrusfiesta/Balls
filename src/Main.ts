@@ -18,8 +18,8 @@ module Balls {
 			this.game.state.add("MainMenu", MainMenu, false);
 			this.game.state.add("Level", Level, false);
 
-			//this.game.state.start("Boot", true, true);
-			this.game.state.start("Level", true, true);
+			this.game.state.start("Boot", true, true);
+			//this.game.state.start("Level", true, true);
 		}
 	}
 }
