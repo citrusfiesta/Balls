@@ -7,11 +7,15 @@ module Balls {
 
 		private _ballMan:BallManager;
 
-		private _acceleration:number = 2400;//1600
-		private _drag:number = 1600;//1000
+		private _acceleration:number = 2400;
+		private _drag:number = 1600;
 		private _maxVelocity:number = 500;
 		private _fireLimit:number = 5;
 		private _counter:number = this._fireLimit;
+		/**
+		 * Helps set the y position for spawning balls.
+		 */
+		private _spawnOffset:number;
 
 
 
@@ -22,20 +26,28 @@ module Balls {
 		 * @param x The horizontal spawning position.
 		 * @param y The vertical spawning position.
 		 * @param key String used to retrieve the texture from the Phaser.Cache.
-		 * @param ballMan BallManager instance for communication with BallManager class.
 		 */
-		constructor(game:Phaser.Game, x:number, y:number, key:string, ballMan:BallManager) {
+		constructor(game:Phaser.Game, x:number, y:number, key:string) {
 			// Pass the parameters on to the superclass.
 			super(game, x, y, key);
-			// Assign the ball manager to its variable.
-			this._ballMan = ballMan;
 			// Set the anchor point to the center of the object.
 			this.anchor.setTo(0.5, 0.5);
 			// Add this object to the game.
 			game.add.existing(this);
 			// Enable physics for this object and set it up.
 			game.physics.enable(this);
+			this._spawnOffset = Math.round(this.height * 0.7);
+			console.debug("offset", this._spawnOffset);
 			this._setUpPhysics();
+		}
+
+		update() {
+			this._move();
+			this._fire();
+		}
+
+		setBallManager(ballMan:BallManager):void {
+			this._ballMan = ballMan;
 		}
 
 		private _setUpPhysics():void {
@@ -44,11 +56,8 @@ module Balls {
 			this.body.bounce.setTo(1);
 			this.body.maxVelocity.x = this._maxVelocity;
 			this.body.drag.x = this._drag;
-		}
-
-		update() {
-			this._move();
-			this._fire();
+			// Ensures that it won't move if hit.
+			this.body.immovable = true;
 		}
 
 		private _move():void {
@@ -66,9 +75,9 @@ module Balls {
 		}
 
 		private _fire():void {
-			if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+			if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
 				if (++this._counter > this._fireLimit) {
-					this._ballMan.fireBall(this.x, this.y, this.rotation);
+					this._ballMan.fireBall(this.x, this.y - this._spawnOffset, this.rotation);
 					this._counter = 0;
 				}
 			}
