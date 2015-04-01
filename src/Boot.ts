@@ -1,4 +1,5 @@
 /// <reference path="libs/phaser.d.ts" />
+/// <reference path="C.ts" />
 
 module Balls {
 
@@ -10,7 +11,7 @@ module Balls {
 
 		preload () {
 
-			this.load.image('preloadBar', 'assets/img/preloadBar.png');
+			this.load.image(C.PRELOAD_BAR, C.PRELOAD_BAR_PATH);
 		}
 
 		create () {

@@ -1,4 +1,5 @@
 /// <reference path="libs/phaser.d.ts" />
+/// <reference path="C.ts" />
 
 module Balls {
 
@@ -11,9 +12,10 @@ module Balls {
 			this.preloadBar = this.add.sprite(400, 300, 'preloadBar');
 			this.load.setPreloadSprite(this.preloadBar);
 
-			this.load.image ('playButton', 'assets/img/playButton.png');
-			this.load.image ('attacker', 'assets/img/attacker.png');
-			this.load.image ('defender', 'assets/img/defender.png');
+			this.load.image('playButton', 'assets/img/playButton.png');
+			this.load.image(C.ATTACKER, C.ATTACKER_PATH);
+			this.load.image(C.DEFENDER, C.DEFENDER_PATH);
+			this.load.image(C.BALL, C.BALL_PATH);
 		}
 
 		create () {
