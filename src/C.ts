@@ -4,6 +4,12 @@ module Balls {
 
 	export class C {
 
+		static BOOT:string = "Boot";
+		static PRELOADER:string ="Preloader";
+		static MAIN_MENU:string = "MainMenu";
+		static LEVEL:string = "Level";
+
+
 		static PRELOAD_BAR:string = "preloadBar";
 		static PRELOAD_BAR_PATH:string = "assets/img/preloadBar.png";
 		static PLAY_BUTTON:string = "playButton";

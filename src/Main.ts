@@ -3,6 +3,7 @@
 /// <reference path="Preloader.ts" />
 /// <reference path="MainMenu.ts" />
 /// <reference path="Level.ts" />
+/// <reference path="C.ts" />
 
 module Balls {
 
@@ -13,12 +14,12 @@ module Balls {
 		constructor() {
 			this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content');
 
-			this.game.state.add("Boot", Boot, false);
-			this.game.state.add("Preloader", Preloader, false);
-			this.game.state.add("MainMenu", MainMenu, false);
-			this.game.state.add("Level", Level, false);
+			this.game.state.add(C.BOOT, Boot, false);
+			this.game.state.add(C.PRELOADER, Preloader, false);
+			this.game.state.add(C.MAIN_MENU, MainMenu, false);
+			this.game.state.add(C.LEVEL, Level, false);
 
-			this.game.state.start("Boot", true, true);
+			this.game.state.start(C.BOOT, true, true);
 			//this.game.state.start("Level", true, true);
 		}
 	}

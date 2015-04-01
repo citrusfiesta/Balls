@@ -9,7 +9,7 @@ module Balls {
 
 		preload () {
 
-			this.preloadBar = this.add.sprite(400, 300, 'preloadBar');
+			this.preloadBar = this.add.sprite(400, 300, C.PRELOAD_BAR);
 			this.load.setPreloadSprite(this.preloadBar);
 
 			this.load.image('playButton', 'assets/img/playButton.png');

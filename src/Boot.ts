@@ -24,7 +24,7 @@ module Balls {
 
 			}
 
-			this.game.state.start('Preloader', true, false);
+			this.game.state.start(C.PRELOADER, true, false);
 		}
 	}
 }
