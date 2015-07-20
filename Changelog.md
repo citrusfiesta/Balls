@@ -11,7 +11,7 @@ To decrease resource usage I opted to use an object pool instead of constantly c
 
 What gave me some trouble was the ball velocity. When sending the ball back to the pool I reset it using
 
-```javascript
+```typescript
 this.body.velocity = 0;
 ```
 
