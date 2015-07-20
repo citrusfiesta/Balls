@@ -11,6 +11,7 @@ module Balls {
 		private _arcadePhysics:Phaser.Physics.Arcade;
 		private _ballMan:BallManager;
 		private _collArray:Array<Phaser.Sprite>;
+		private _overlapArray:Array<Phaser.Sprite>;
 
 		private _speed:number = 500;
 		private _rotation:number;
@@ -25,11 +26,12 @@ module Balls {
 		private _halfPi:number = Math.PI / 2;
 
 		constructor(game:Phaser.Game, x:number, y:number, key:string, ballMan:BallManager,
-					collArray:Array<Phaser.Sprite>) {
+					collArray:Array<Phaser.Sprite>, overlapArray:Array<Phaser.Sprite>) {
 			super(game, x, y, key);
 			this._arcadePhysics = game.physics.arcade;
 			this._ballMan = ballMan;
 			this._collArray = collArray;
+			this._overlapArray = overlapArray;
 			this.anchor.setTo(0.5, 0.5);
 			game.add.existing(this);
 			game.physics.enable(this);
@@ -61,7 +63,7 @@ module Balls {
 			if (active) {
 				// Set the movement angle according to the rotation of the attacker when firing.
 				this.body.velocity.copyFrom(this._arcadePhysics.velocityFromRotation
-				(this._rotation, this._speed));
+					(this._rotation, this._speed));
 			} else {
 				// Stop the movement and move back to off screen position.
 				this.body.velocity = 0;
@@ -80,6 +82,19 @@ module Balls {
 
 		private _checkCollision():void {
 			this._arcadePhysics.collide(this, this._collArray);
+			for (var i = 0, n = this._overlapArray.length; i < n; i++) {
+				//for loop and if colliding, act accordingly and break out of for loop
+				if(this._arcadePhysics.overlap(this, this._overlapArray[i])) {
+					if (i == 0) {
+						this._backToPool();
+						//decrease score of attacker
+					} else if (i == 1) {
+						this._backToPool();
+						//Add particles?
+					}
+					break;
+				}
+			}
 		}
 	}
 }
