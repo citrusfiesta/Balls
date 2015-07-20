@@ -17,11 +17,10 @@ module Balls {
 
 		private _poolCounter:number;
 
-		constructor(game:Phaser.Game, collArray:Array<Phaser.Sprite>) {
+		constructor(game:Phaser.Game, collArray:Array<Phaser.Sprite>, overlapArray:Array<Phaser.Sprite>) {
 			this._game = game;
-			this._pool = this._createPool(32, game, C.OFFSCREEN, C.OFFSCREEN, C.BALL, collArray);
+			this._pool = this._createPool(32, game, C.OFFSCREEN, C.OFFSCREEN, C.BALL, collArray, overlapArray);
 		}
-
 
 		fireBall(x:number, y:number, rotation:number):void {
 			this._getBall().fire(x, y, rotation);
@@ -38,18 +37,19 @@ module Balls {
 		 * @param x	Horizontal spawn position when creating an instance of Ball.
 		 * @param y Vertical spawn position when creating an instance of Ball.
 		 * @param key Reference to the Ball texture. Used for creating an instance of Ball.
-		 * @param collArray Array of the items that instances of Ball can collide with.
+		 * @param collArray Array of the items that instances of Ball will bounce off of.
+		 * @param overlapArray Array of the items that 'destroy' instances of Ball.
 		 * @returns {Array<Ball>}
 		 * @private
 		 */
 		private _createPool(size:number, game:Phaser.Game, x:number, y:number, key:string,
-							collArray:Array<Phaser.Sprite>):Array<Ball> {
+							collArray:Array<Phaser.Sprite>, overlapArray:Array<Phaser.Sprite>):Array<Ball> {
 			var array:Array<Ball> = [];
 			this._poolCounter = size;
 
 			var i:number = size;
 			while (--i > -1)
-				array.push(new Ball(game, x, y, key, this, collArray));
+				array.push(new Ball(game, x, y, key, this, collArray, overlapArray));
 			return array;
 		}
 
