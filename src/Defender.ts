@@ -26,7 +26,7 @@ module Balls {
 
 		private _setUpPhysics():void {
 			this.body.collideWorldBounds = true;
-			// Setting the x-value of bounce to 0.5 (i.e. 50%).
+			// How much the object bounces off of other objects/walls. 0.5 = 50%.
 			this.body.bounce.setTo(0.5);
 			this.body.maxVelocity.x = this._maxVelocity;
 			this.body.drag.x = this._drag;
