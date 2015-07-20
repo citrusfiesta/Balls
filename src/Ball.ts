@@ -66,7 +66,7 @@ module Balls {
 					(this._rotation, this._speed));
 			} else {
 				// Stop the movement and move back to off screen position.
-				this.body.velocity = 0;
+				this.body.velocity = new Phaser.Point();
 				this.x = this.y = C.OFFSCREEN;
 			}
 		}
