@@ -10,10 +10,12 @@ module Balls {
 
 		private _arcadePhysics:Phaser.Physics.Arcade;
 		private _ballMan:BallManager;
-		private _collArray:Array<Phaser.Sprite>;
+		private _defender:Defender;
+		private _overlapArray:Array<Phaser.Sprite>;
 
 		private _speed:number = 500;
 		private _rotation:number;
+		private _reflected:boolean = false;
 
 		/**
 		 * Used in update() to decide if collisions need to be checked.
@@ -25,11 +27,12 @@ module Balls {
 		private _halfPi:number = Math.PI / 2;
 
 		constructor(game:Phaser.Game, x:number, y:number, key:string, ballMan:BallManager,
-					collArray:Array<Phaser.Sprite>) {
+					defender:Defender, overlapArray:Array<Phaser.Sprite>) {
 			super(game, x, y, key);
 			this._arcadePhysics = game.physics.arcade;
 			this._ballMan = ballMan;
-			this._collArray = collArray;
+			this._defender = defender;
+			this._overlapArray = overlapArray;
 			this.anchor.setTo(0.5, 0.5);
 			game.add.existing(this);
 			game.physics.enable(this);
@@ -61,10 +64,12 @@ module Balls {
 			if (active) {
 				// Set the movement angle according to the rotation of the attacker when firing.
 				this.body.velocity.copyFrom(this._arcadePhysics.velocityFromRotation
-				(this._rotation, this._speed));
+					(this._rotation, this._speed));
+				// Reset _reflected to false to ensure the ball collides with the defender.
+				this._reflected = false;
 			} else {
 				// Stop the movement and move back to off screen position.
-				this.body.velocity = 0;
+				this.body.velocity = new Phaser.Point();
 				this.x = this.y = C.OFFSCREEN;
 			}
 		}
@@ -79,7 +84,33 @@ module Balls {
 		}
 
 		private _checkCollision():void {
-			this._arcadePhysics.collide(this, this._collArray);
+			if (!this._reflected && this._arcadePhysics.overlap(this, this._defender)) {
+				// Mirror the rotation perpendicular to the defender.
+				// Also add topspin in the defender's direction of movement.
+				this._rotation = -this._rotation - Phaser.Math.degToRad(this._defender.body.velocity.x / 50);
+				// Reset the old and apply the new velocity
+				this.body.velocity = new Phaser.Point();
+				this.body.velocity.copyFrom(this._arcadePhysics.velocityFromRotation(
+					this._rotation, this._speed));
+				// Set _reflected to true so that there will be no more collision checks with the defender.
+				this._reflected = true;
+			}
+
+			// Loop through the overlap array and act accordingly for the different objects.
+			for (var i = 0, n = this._overlapArray.length; i < n; i++) {
+				if(this._arcadePhysics.overlap(this, this._overlapArray[i])) {
+					if (i == 0) {
+						this._backToPool();
+						//todo: decrease score of attacker
+					} else if (i == 1) {
+						this._backToPool();
+						//todo: Add particles?
+					}
+					// If the correct overlapping object has been found, stop looping through the rest
+					break;
+				}
+			}
 		}
+
 	}
 }

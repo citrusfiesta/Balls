@@ -22,6 +22,9 @@ module Balls {
 		static DEFENDER_PATH:string = "assets/img/defender.png";
 		static BALL:string = "ball";
 		static BALL_PATH:string = "assets/img/ball.png";
+
+		static GROUND:string = "ground";
+		static GROUND_PATH:string = "assets/img/ground.png";
 		/**
 		 * The x and y value that Ball objects are at when they're not active.
 		 * @type {number}

@@ -37,7 +37,7 @@ module Balls {
 			// Enable physics for this object and set it up.
 			game.physics.enable(this);
 			this._spawnOffset = Math.round(this.height * 0.7);
-			console.debug("offset", this._spawnOffset);
+
 			this._setUpPhysics();
 		}
 
@@ -52,7 +52,7 @@ module Balls {
 
 		private _setUpPhysics():void {
 			this.body.collideWorldBounds = true;
-			// Setting the x-value of bounce to 1 (i.e. 100%).
+			// How much the object bounces off of other objects/walls. 1 = 100%.
 			this.body.bounce.setTo(1);
 			this.body.maxVelocity.x = this._maxVelocity;
 			this.body.drag.x = this._drag;
