@@ -18,11 +18,6 @@ module Balls {
 
 		screenMid:number;
 
-		//preload() {
-		//	this.load.image(C.ATTACKER, C.ATTACKER_PATH);
-		//	this.load.image(C.BALL, C.BALL_PATH);
-		//}
-
 		create() {
 			this.screenMid = this.game.stage.width / 2;
 			this.game.physics.enable(this.game);
