@@ -25,6 +25,9 @@ module Balls {
 
 		static GROUND:string = "ground";
 		static GROUND_PATH:string = "assets/img/ground.png";
+		static GOAL:string = "goal";
+		static GOAL_PATH:string = "assets/img/goal.png";
+
 		/**
 		 * The x and y value that Ball objects are at when they're not active.
 		 * @type {number}

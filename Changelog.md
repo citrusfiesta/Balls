@@ -31,3 +31,17 @@ because ```velocity``` is a ```Phaser.Point``` object.
 ## 15.07.21
 
 ### Changing finetuning again
+asdasdasd
+
+### Things to look out for when adding classes with TypeScript
+- Add a reference to the new class at the top of classes that reference it. Like so:
+
+```typescript
+/// <reference path="BallManager.ts" />
+```
+
+- Don't forget to add the resulting JavaScript file to the html file.
+
+```html
+<script src="js/BallManager.js"></script>
+```

@@ -17,6 +17,7 @@ module Balls {
 			this.load.image(C.DEFENDER, C.DEFENDER_PATH);
 			this.load.image(C.BALL, C.BALL_PATH);
 			this.load.image(C.GROUND, C.GROUND_PATH);
+			this.load.image(C.GOAL, C.GOAL_PATH);
 		}
 
 		create () {
