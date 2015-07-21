@@ -23,7 +23,11 @@ this.body.velocity = new Phaser.Point();
 
 because ```velocity``` is a ```Phaser.Point``` object.
 
-__LEARNED:__ While object pooling can definitely impact performance in a positive way, it does come at the cost of more planning ahead and the risk of unforeseen errors down the road.
+- __LEARNED:__ While object pooling can definitely impact performance in a positive way, it does come at the cost of more planning ahead and the risk of unforeseen errors down the road.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
 [2]: http://stackoverflow.com/a/243778
+
+## 15.07.21
+
+### Changing finetuning again
