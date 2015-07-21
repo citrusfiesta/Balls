@@ -33,14 +33,14 @@ because ```velocity``` is a ```Phaser.Point``` object.
 ### Changing finetuning again
 asdasdasd
 
-### Things to look out for when adding classes with TypeScript
-- Add a reference to the new class at the top of classes that reference it. Like so:
+### Common error of mine when adding classes in TypeScript
+Forgetting to add a reference to the new class in classes that use it. Like ```import``` in AS3, this needs to be added at the start of the class:
 
 ```typescript
 /// <reference path="BallManager.ts" />
 ```
 
-- Don't forget to add the resulting JavaScript file to the html file.
+The same needs to be done for the html file which will load all the JS scripts. It also needs to be told to load in the newly created class by adding this in the ```<head>``` of the html file:
 
 ```html
 <script src="js/BallManager.js"></script>
