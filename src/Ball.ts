@@ -99,13 +99,13 @@ module Balls {
 			// Loop through the overlap array and act accordingly for the different objects.
 			for (var i = 0, n = this._overlapArray.length; i < n; i++) {
 				if(this._arcadePhysics.overlap(this, this._overlapArray[i])) {
-					if (i == 0) {// The attacker
+					if (i == 0) {// Collision with the attacker
 						this._backToPool();
 						//todo: decrease score of attacker
-					} else if (i == 1) {// The ground
+					} else if (i == 1) {// Collision with the ground
 						this._backToPool();
 						//todo: Add particles?
-					} else if (i == 2) {// The goal
+					} else if (i == 2) {// Collision with the goal
 						this._backToPool();
 						//todo: increase score
 					}
