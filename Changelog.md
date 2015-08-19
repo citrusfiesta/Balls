@@ -1,5 +1,20 @@
 # Changelog
 
+## 15.07.10
+
+### Redistritibuted loading of game to multiple classes
+
+Splitting the start up of the game into multiple classes that each do one thing, make it clear what each part does and make it easier to bugfix later on. Dividing your project up into classes that do one thing (or a few things) is one of the aspects of OOP (Object Oriented Programming).
+
+I divided the loading of the game into 4 classes:
+
+- __App__ Creates the object that holds the game.
+
+- __Main__ Loads in classes that are required for handling the startup and the levels: ```Boot```, ```Preloader```, ```MainMenu```, and ```Level```. Then it starts the ```Boot``` class.
+
+- __Boot__ Global settings are defined here (eg. when losing focus of the tab, should the game keep running?), as well as platform specific settings (ie. for mobile, desktop, etc.). This game is made for desktop only, so the platform specific options are there only for good practice and habit forming.
+
+- __Preloader__ Loads in all necessary assets and shows a progress bar linked to the loading process.
 
 ## 15.07.20
 
@@ -61,3 +76,7 @@ The same needs to be done for the html file which will load all the JS scripts. 
 ```html
 <script src="js/BallManager.js"></script>
 ```
+
+## 15.07.24
+
+### Score
