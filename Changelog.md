@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## 15.07.20
 
 ### Finetuned ball collision
@@ -30,8 +31,23 @@ because ```velocity``` is a ```Phaser.Point``` object.
 
 ## 15.07.21
 
-### Changing finetuning again
-asdasdasd
+### Removed automatic physics collision
+- It had some weird bug that would move the ball sideways a little after a collision
+- When the ball was being reflected I wanted to add spin to the ball comparable to the direction and speed the defender was traveling at. This would a slight unpredictability to the reflected balls and increase the difficulty for the attacker. The standard ```Arcade.Physics.collide()``` made it hard to work the added spin into the collision model.
+- I fixed it by doing the collision by hand, though I still use the Arcade Physics to check for overlap. If there is an overlap, the ball direction is mirrored (on the axis perpendicular to the defender) and that new direction is used to set a new velocity
+
+```typescript
+// Mirror the rotation perpendicular to the defender.
+// Also add topspin in the defender's direction of movement.
+this._rotation = -this._rotation - Phaser.Math.degToRad(this._defender.body.velocity.x / 50);
+// Reset the old and apply the new velocity
+this.body.velocity = new Phaser.Point();
+this.body.velocity.copyFrom(this._arcadePhysics.velocityFromRotation(
+this._rotation, this._speed));
+// Set _reflected to true so that there will be no more collision checks with the defender.
+this._reflected = true;
+```
+
 
 ### Common error of mine when adding classes in TypeScript
 Forgetting to add a reference to the new class in classes that use it. Like ```import``` in AS3, this needs to be added at the start of the class:
