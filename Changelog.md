@@ -16,6 +16,68 @@ I divided the loading of the game into 4 classes:
 
 - __Preloader__ Loads in all necessary assets and shows a progress bar linked to the loading process.
 
+## 15.07.12
+
+### Optimizing performance with an object pool
+
+Usually when a ball is fired, I instantiate a new instance of the ```Ball``` object. However, this is bad for performance as there is a lot of overhead done by the computer when creating a new instance. Doing this on the fly can lead to unpredictable spikes in resource usage and ultimately to lag and lower framerates. To fix this problem __object pooling__ was invented.
+
+#### Object pooling explained
+
+Object pooling means that you instantiate a number of objects (the pool) at the beginning and get the resource usage for instantiating out of the way at the start. This ensures that you don't get unplanned resource usage while the game is running.
+
+The objects stay in the pool and are then activated when needed. Once they are done they are deactivated and sent back to the pool to be used again later.
+
+One drawback is that you have to keep track of all properties of the object and reset them manually when returning them to the pool or else you might get unforeseen bugs. Another is that if you don't have enough objects in the pool you can get unpredicted behaviour when requesting something from the pool while it's currently empty.
+
+More info about object pooling can be found [here][3].
+
+#### Object pooling in this game
+
+In this game the balls that are shot are pooled as it prevents constant instantiating when firing the ball. The ```BallManager``` class handles the pooling for the balls.
+
+First, the pool is created.
+
+```typescript
+private _createPool(size:number, game:Phaser.Game, x:number, y:number, key:string,
+defender:Defender, overlapArray:Array<Phaser.Sprite>):Array<Ball> {
+	var array:Array<Ball> = [];
+	this._poolCounter = size;
+
+	var i:number = size;
+	while (--i > -1)
+	array.push(new Ball(game, x, y, key, this, defender, overlapArray));
+	return array;
+}
+```
+
+Then, when an object is needed, the public function ```fireBall``` is used by the ```Attacker``` class. This gives the latest ball from the pool and increments ```_poolCounter```, which keeps track of which ball from the pool give out next.
+
+```typescript
+fireBall(x:number, y:number, rotation:number):void {
+	this._getBall().fire(x, y, rotation);
+}
+
+private _getBall():Ball {
+	if (this._poolCounter > 0)
+		return this._pool[--this._poolCounter];
+	else
+		throw new Error ("Pool is exhausted.");
+}
+```
+
+Once a ball has completed its purpose it's deactivated and reset and ```_poolCounter``` is decremented to allow the returned ball to be used again.
+
+```typescript
+backToPool(ball:Ball):void {
+	this._returnBall(ball);
+}
+
+private _returnBall(ball:Ball):void {
+	this._pool[this._poolCounter++] = ball;
+}
+```
+
 ## 15.07.20
 
 ### Finetuned ball collision
@@ -40,9 +102,6 @@ this.body.velocity = new Phaser.Point();
 because ```velocity``` is a ```Phaser.Point``` object.
 
 - __LEARNED:__ While object pooling can definitely impact performance in a positive way, it does come at the cost of more planning ahead and the risk of unforeseen errors down the road.
-
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
-[2]: http://stackoverflow.com/a/243778
 
 ## 15.07.21
 
@@ -80,3 +139,7 @@ The same needs to be done for the html file which will load all the JS scripts. 
 ## 15.07.24
 
 ### Score
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+[2]: http://stackoverflow.com/a/243778
+[3]: http://gameprogrammingpatterns.com/object-pool.html
