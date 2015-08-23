@@ -235,6 +235,11 @@ this._rotation, this._speed));
 this._reflected = true;
 ```
 
+## 15.07.24
+
+### Game art
+
+Improving the look of the game slightly by adding new graphics for the main menu and game elements.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
 [2]: http://stackoverflow.com/a/243778
