@@ -14,7 +14,7 @@ module Balls {
             this.playButton.anchor.y = 0.5;
 
             var text: Phaser.Text = this.game.add.text(this.game.stage.width / 2, 20,
-                'Controls for square: left, right, up\nControls for rectangle: A, D\n\n' +
+                'Controls for player 1 (square): left, right, up\nControls for player 2 (rectangle): A, D\n\n' +
                 'Square shoots with UP and tries to score, rectangle defends by blocking\n\n' +
                 'Square should try to get as much points in 30 seconds as possible,\n' +
                 'rectangle should try to block as much as possible', {
