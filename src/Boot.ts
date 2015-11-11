@@ -18,6 +18,8 @@ module Balls {
 			// If tab loses focus, the game does not pause.
 			//this.stage.disableVisibilityChange = true;
 
+			this.game.stage.backgroundColor = 0xdedede;
+
 			if (this.game.device.desktop) {// If game is played on a PC, execute these desktop specific settings
 
 			} else {// Else (it's played on mobile and) load mobile specific settings
