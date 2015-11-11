@@ -3,18 +3,19 @@
 
 module Balls {
 
-	export class MainMenu extends Phaser.State {
+    export class MainMenu extends Phaser.State {
 
-		playButton:Phaser.Sprite;
+        playButton: Phaser.Button;
 
-		create () {
+        create() {
+            this.playButton = this.add.button(this.game.stage.width / 2,
+                this.game.stage.height / 2 + 100, C.PLAY_BUTTON, this.startGame, this);
+            this.playButton.anchor.x = 0.5;
+            this.playButton.anchor.y = 0.5;
+        }
 
-			this.playButton = this.add.sprite(100, 100, C.PLAY_BUTTON);
-			this.input.onDown.addOnce(this.startGame, this);
-		}
-
-		startGame () {
-			this.game.state.start(C.LEVEL, true, false);
-		}
-	}
+        startGame() {
+            this.game.state.start(C.LEVEL, true, false);
+        }
+    }
 }
