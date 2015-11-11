@@ -15,6 +15,8 @@ module Balls {
 		static PRELOAD_BAR_PATH:string = "assets/img/preloadBar.png";
 		static PLAY_BUTTON:string = "playButton";
 		static PLAY_BUTTON_PATH:string = "assets/img/playButton.png";
+		static BLACK:string = "black";
+		static BLACK_PATH:string = "assets/img/black.png";
 
 
 		static ATTACKER:string = "attacker";
@@ -28,6 +30,8 @@ module Balls {
 		static GROUND_PATH:string = "assets/img/ground.png";
 		static GOAL:string = "goal";
 		static GOAL_PATH:string = "assets/img/goal.png";
+
+		static score:number = 0;
 
 		/**
 		 * The x and y value that Ball objects are at when they're not active.
