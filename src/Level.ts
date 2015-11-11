@@ -5,6 +5,7 @@
 /// <reference path="Goal.ts" />
 /// <reference path="BallManager.ts" />
 /// <reference path="C.ts" />
+/// <reference path="End.ts" />
 
 module Balls {
 
@@ -51,8 +52,13 @@ module Balls {
                 this._timerText.text = (30 - (Math.floor(this._timer / 60) +
                     (this._timer % 60) / 60)).toFixed(1);
             } else if (this._timer === 1801) {
-                console.log('timer done');
+                this.stopGameAndFade();
             }
+        }
+
+        stopGameAndFade() {
+            this.game.stage.removeChildren();
+            this.game.state.start(C.END, true, false);
         }
     }
 }

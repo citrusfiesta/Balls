@@ -8,6 +8,7 @@ module Balls {
 		static PRELOADER:string ="Preloader";
 		static MAIN_MENU:string = "MainMenu";
 		static LEVEL:string = "Level";
+		static END:string = "End";
 
 
 		static PRELOAD_BAR:string = "preloadBar";
