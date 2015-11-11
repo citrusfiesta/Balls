@@ -35,19 +35,24 @@ module Balls {
             // Pass the BallManger reference to the attacker.
             this._attacker.setBallManager(this._ballMan);
 
-            this._timer = 60 * 30;
-            this._timerText = this.game.add.text(this.screenMid, 50, this._timer.toFixed(1), {
-                font: "15px sans-serif",
-                fill: "#222222"
-            });
+            this._timer = 0;
+            this._timerText = this.game.add.text(this.screenMid, this.game.stage.height / 2,
+                this._timer.toFixed(1), {
+                    font: "bold 60px sans-serif",
+                    fill: "#888888",
+                    align: "center"
+                });
+            this._timerText.anchor.x = 0.5;
+            this._timerText.anchor.y = 0.5;
         }
 
         update() {
-            this._timer--;
-            this._timerText.text = (Math.floor(this._timer / 60) +
-                (this._timer % 60) / 60).toFixed(1);
-            if (this._timer === 0)
+            if (++this._timer <= 1800) {
+                this._timerText.text = (30 - (Math.floor(this._timer / 60) +
+                    (this._timer % 60) / 60)).toFixed(1);
+            } else if (this._timer === 1801) {
                 console.log('timer done');
+            }
         }
     }
 }
