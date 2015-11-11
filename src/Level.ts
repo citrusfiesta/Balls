@@ -45,6 +45,8 @@ module Balls {
                 });
             this._timerText.anchor.x = 0.5;
             this._timerText.anchor.y = 0.5;
+
+            C.score = 0;
         }
 
         update() {
@@ -57,7 +59,6 @@ module Balls {
         }
 
         stopGameAndFade() {
-            this.game.stage.removeChildren();
             this.game.state.start(C.END, true, false);
         }
     }
