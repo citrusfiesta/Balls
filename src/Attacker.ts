@@ -1,5 +1,6 @@
 /// <reference path="libs/phaser.d.ts" />
 /// <reference path="BallManager.ts" />
+/// <reference path="C.ts" />
 
 module Balls {
 
@@ -16,7 +17,6 @@ module Balls {
          * Helps set the y position for spawning balls.
          */
         private _spawnOffset: number;
-        private _score: number = 0;
         private _scoreText: Phaser.Text;
 
 
@@ -42,7 +42,7 @@ module Balls {
 
             this._setUpPhysics();
 
-            this._scoreText = game.add.text(32, 32, this._score.toString(), {
+            this._scoreText = game.add.text(32, 32, C.score.toString(), {
                 font: "30px sans-serif",
                 fill: "#dedede",
                 align: "center"
@@ -86,7 +86,7 @@ module Balls {
             this._scoreText.x = 32 + this.body.x;
             this._scoreText.y = 32 + this.body.y;
             this._scoreText.rotation = this.body.sprite.rotation;
-            this._scoreText.text = this._score.toString();
+            this._scoreText.text = C.score.toString();
         }
 
         private _fire(): void {
@@ -99,7 +99,7 @@ module Balls {
         }
 
         changeScore(value:number):void {
-        	this._score += value;
+        	C.score += value;
         }
     }
 }
