@@ -15,6 +15,7 @@ module Balls {
             this.load.setPreloadSprite(this.preloadBar);
 
             this.load.image(C.PLAY_BUTTON, C.PLAY_BUTTON_PATH);
+            this.load.image(C.BLACK, C.BLACK_PATH);
             this.load.image(C.ATTACKER, C.ATTACKER_PATH);
             this.load.image(C.DEFENDER, C.DEFENDER_PATH);
             this.load.image(C.BALL, C.BALL_PATH);
