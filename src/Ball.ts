@@ -102,12 +102,14 @@ module Balls {
 					if (i == 0) {// Collision with the attacker
 						this._backToPool();
 						//todo: decrease score of attacker
+						this._overlapArray[0].changeScore(-1);
 					} else if (i == 1) {// Collision with the ground
 						this._backToPool();
 						//todo: Add particles?
 					} else if (i == 2) {// Collision with the goal
 						this._backToPool();
 						//todo: increase score
+						this._overlapArray[0].changeScore(1);
 					}
 					// If the correct overlapping object has been found, stop looping through the rest
 					break;
